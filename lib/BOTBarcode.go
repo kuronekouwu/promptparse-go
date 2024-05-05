@@ -43,3 +43,28 @@ func (bc *BOTBarcode) ToString() string {
 
 	return fmt.Sprintf("|%s\r%s\r%s\r%s", bc.BillerID, bc.Ref1, bc.Ref2, fmt.Sprintf("%.2f", bc.Amount))
 }
+
+func (bc *BOTBarcode) ToQRTag30() string {
+	tag30 := []TLVTag{
+		Tag("00", "A000000677010112"),
+		Tag("01", bc.BillerID),
+		Tag("02", bc.Ref1),
+		Tag("03", bc.Ref2),
+	}
+
+	payload := []TLVTag{
+		Tag("00", "01"),
+		Tag("01", "12"),
+		Tag("54", fmt.Sprintf("%.2f", float64(bc.Amount*100)/100)),
+		Tag("30", Encode(tag30)),
+		Tag("53", "764"),
+		Tag("58", "TH"),
+	}
+
+	tag, err := WithCRCTag(Encode(payload), "63")
+	if err != nil {
+		return ""
+	}
+
+	return tag
+}
