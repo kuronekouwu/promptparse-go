@@ -119,7 +119,7 @@ import (
 )
 
 func main() {
-	slip := promptparse.("0041000600.....")
+	slip := promptparse.ParseBarcode("0041000600.....")
 	if slip == nil {
 		log.Println("Invalid slip verify")
 		return
