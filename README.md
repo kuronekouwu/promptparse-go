@@ -1,5 +1,9 @@
 # Promptparse Golang
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/mrwan200/promptparse-go)](https://goreportcard.com/report/github.com/mrwan200/promptparse-go)
+[![Documentation](https://godoc.org/github.com/mrwan200/promptparse-go?status.svg)](http://godoc.org/github.com/mrwan200/promptparse-go/v2)
+[![GitHub release](https://img.shields.io/github/release/mrwan200/promptparse-go.svg)](https://github.com/mrwan200/promptparse-go/releases)
+
 "All-in-one Golang for PromptPay & EMVCo QR Codes"
 
 That No dependency required. So here we go!
