@@ -15,6 +15,7 @@ type TLVTag struct {
 	Length  int
 }
 
+// Decode TLV string into array of TLV Tags
 func Decode(payload string) (*[]TLVTag, error) {
 	var tags []TLVTag
 
@@ -44,6 +45,7 @@ func Decode(payload string) (*[]TLVTag, error) {
 	return &tags, nil
 }
 
+// Encode TLV Tags array into TLV string
 func Encode(tags []TLVTag) string {
 	var payload string
 
@@ -63,6 +65,7 @@ func Encode(tags []TLVTag) string {
 	return payload
 }
 
+// Generate CRC Checksum for provided string
 func Checksum(payload string) (string, error) {
 	sum, err := utils.CRC16XModem(payload, 0xffff)
 	if err != nil {
@@ -72,6 +75,7 @@ func Checksum(payload string) (string, error) {
 	return result, nil
 }
 
+// Get TLV string combined with CRC Tag
 func WithCRCTag(payload string, crcTagId string) (string, error) {
 	payload += fmt.Sprintf("%02s", crcTagId)
 	payload += "04"
@@ -86,6 +90,7 @@ func WithCRCTag(payload string, crcTagId string) (string, error) {
 
 }
 
+// Get Tag or Sub-tag by Tag ID in array of TLV Tags
 func Get(tlvTags []TLVTag, tagId string, subTagId string) TLVTag {
 	var tag TLVTag
 
@@ -108,6 +113,7 @@ func Get(tlvTags []TLVTag, tagId string, subTagId string) TLVTag {
 	return tag
 }
 
+// Create new TLV Tag
 func Tag(tagId string, value string) TLVTag {
 	return TLVTag{
 		ID:     tagId,

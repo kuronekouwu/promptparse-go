@@ -44,6 +44,9 @@ func (bc *BOTBarcode) ToString() string {
 	return fmt.Sprintf("|%s\r%s\r%s\r%s", bc.BillerID, bc.Ref1, bc.Ref2, fmt.Sprintf("%.2f", bc.Amount))
 }
 
+// Converts BOT Barcode to PromptPay QR Tag 30 (Bill Payment)
+//
+// This method works for some biller, depends on destination bank
 func (bc *BOTBarcode) ToQRTag30() string {
 	tag30 := []TLVTag{
 		Tag("00", "A000000677010112"),

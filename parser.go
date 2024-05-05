@@ -6,6 +6,7 @@ import (
 	"github.com/mrwan200/promptparse-go/lib"
 )
 
+// Parse any EMVCo-compatible QR Code data string
 func Parse(payload string, strict bool, subTags bool) *lib.EMVCoQRStruct {
 	reg, err := regexp.Compile(`^\d{4}.+`)
 	if err != nil {
@@ -63,6 +64,7 @@ func Parse(payload string, strict bool, subTags bool) *lib.EMVCoQRStruct {
 	return &emv
 }
 
+// Parse barcode data string (BOT Barcode Standard)
 func ParseBarcode(payload string) lib.BOTBarcode {
 	barcode := lib.BOTBarcode{}
 	barcode.FromString(payload)

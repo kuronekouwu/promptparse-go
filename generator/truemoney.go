@@ -7,6 +7,11 @@ import (
 	"github.com/mrwan200/promptparse-go/utils"
 )
 
+// Generate QR Code for TrueMoney Wallet
+//
+// This QR Code can also be scanned with other apps,
+// just like a regular e-Wallet PromptPay QR
+// but `Personal Message (Tag 81)` will be ignored.
 func Truemoney(mobileNo string, amount float64, message string) string {
 	tag29 := []lib.TLVTag{
 		lib.Tag("00", "A000000677010111"),
