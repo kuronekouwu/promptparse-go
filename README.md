@@ -128,29 +128,6 @@ import (
 )
 
 func main() {
-	slip := promptparse.ParseBarcode("0041000600.....")
-	if slip == nil {
-		log.Println("Invalid slip verify")
-		return
-	}
-
-	log.Println(slip.SendingBank) // Result: YYYY/MM/DD HH:mm:ss 004
-	log.Println(slip.TransRef) // Result: YYYY/MM/DD HH:mm:ss 0141012...
-}
-```
-
-### Convert BOT Barcode to PromptPay QR Tag 30 (Bill Payment)
-
-```golang
-package main
-
-import (
-	"log"
-
-	promptparse "github.com/mrwan200/promptparse-go"
-)
-
-func main() {
 	bill := promptparse.ParseBarcode("|310109999999901\r...")
 	if bill.BillerID == "" {
 		log.Println("Invalid barcode.")
