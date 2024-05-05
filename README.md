@@ -8,6 +8,11 @@ That No dependency required. So here we go!
 
 [maythiwat/promptparse](https://github.com/maythiwat/promptparse)
 
+## Insatallation
+```sh
+go get github.com/mrwan200/promptparse-go
+```
+
 ## Features
 
 - **Parse** &mdash; PromptPay & EMVCo QR Code data strings into object
