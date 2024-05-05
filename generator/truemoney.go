@@ -16,7 +16,7 @@ func Truemoney(mobileNo string, amount float64, message string) string {
 	payload := []lib.TLVTag{
 		lib.Tag("00", "01"),
 		lib.Tag("01", "11"),
-		lib.Tag("29", *lib.Encode(tag29)),
+		lib.Tag("29", lib.Encode(tag29)),
 		lib.Tag("53", "764"),
 		lib.Tag("58", "TH"),
 	}
@@ -34,10 +34,10 @@ func Truemoney(mobileNo string, amount float64, message string) string {
 		payload = result
 	}
 
-	tag, err := lib.WithCRCTag(*lib.Encode(payload), "63")
+	tag, err := lib.WithCRCTag(lib.Encode(payload), "63")
 	if err != nil {
 		return ""
 	}
 
-	return *tag
+	return tag
 }

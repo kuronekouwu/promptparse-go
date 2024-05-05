@@ -44,7 +44,7 @@ func Decode(payload string) (*[]TLVTag, error) {
 	return &tags, nil
 }
 
-func Encode(tags []TLVTag) *string {
+func Encode(tags []TLVTag) string {
 	var payload string
 
 	for _, tag := range tags {
@@ -55,34 +55,34 @@ func Encode(tags []TLVTag) *string {
 		if len(tag.SubTags) > 0 {
 			result := Encode(tag.SubTags)
 			// Append it
-			payload += *result
+			payload += result
 		}
 		payload += tag.Value
 	}
 
-	return &payload
+	return payload
 }
 
-func Checksum(payload string) (*string, error) {
+func Checksum(payload string) (string, error) {
 	sum, err := utils.CRC16XModem(payload, 0xffff)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 	result := strings.ToUpper(fmt.Sprintf("%04x", sum))
-	return &result, nil
+	return result, nil
 }
 
-func WithCRCTag(payload string, crcTagId string) (*string, error) {
+func WithCRCTag(payload string, crcTagId string) (string, error) {
 	payload += fmt.Sprintf("%02s", crcTagId)
 	payload += "04"
 	// Checksum
 	crc, err := Checksum(payload)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
-	payload += *crc
+	payload += crc
 
-	return &payload, nil
+	return payload, nil
 
 }
 

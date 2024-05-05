@@ -16,7 +16,7 @@ const (
 
 func SlipVerify(sendingBank string, transRef string) string {
 	payload := []lib.TLVTag{
-		lib.Tag("00", *lib.Encode([]lib.TLVTag{
+		lib.Tag("00", lib.Encode([]lib.TLVTag{
 			{
 				ID:    "00",
 				Value: "000001",
@@ -33,12 +33,12 @@ func SlipVerify(sendingBank string, transRef string) string {
 		lib.Tag("51", "TH"),
 	}
 
-	tag, err := lib.WithCRCTag(*lib.Encode(payload), "91")
+	tag, err := lib.WithCRCTag(lib.Encode(payload), "91")
 	if err != nil {
 		return ""
 	}
 
-	return *tag
+	return tag
 }
 
 func AnyID(types string, target string, amount float64) string {
@@ -58,7 +58,7 @@ func AnyID(types string, target string, amount float64) string {
 	payload := []lib.TLVTag{
 		lib.Tag("00", "01"),
 		lib.Tag("01", "11"),
-		lib.Tag("29", *lib.Encode(tag29)),
+		lib.Tag("29", lib.Encode(tag29)),
 		lib.Tag("53", "764"),
 		lib.Tag("58", "TH"),
 	}
@@ -70,12 +70,12 @@ func AnyID(types string, target string, amount float64) string {
 		payload = result
 	}
 
-	tag, err := lib.WithCRCTag(*lib.Encode(payload), "63")
+	tag, err := lib.WithCRCTag(lib.Encode(payload), "63")
 	if err != nil {
 		return ""
 	}
 
-	return *tag
+	return tag
 }
 
 func BillPayment(billerID string, amount float64, ref1 string, ref2 string, ref3 string) string {
@@ -94,7 +94,7 @@ func BillPayment(billerID string, amount float64, ref1 string, ref2 string, ref3
 	payload := []lib.TLVTag{
 		lib.Tag("00", "01"),
 		lib.Tag("01", "11"),
-		lib.Tag("30", *lib.Encode(tag30)),
+		lib.Tag("30", lib.Encode(tag30)),
 		lib.Tag("53", "764"),
 		lib.Tag("58", "TH"),
 	}
@@ -112,10 +112,10 @@ func BillPayment(billerID string, amount float64, ref1 string, ref2 string, ref3
 		payload = result
 	}
 
-	tag, err := lib.WithCRCTag(*lib.Encode(payload), "63")
+	tag, err := lib.WithCRCTag(lib.Encode(payload), "63")
 	if err != nil {
 		return ""
 	}
 
-	return *tag
+	return tag
 }

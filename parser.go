@@ -7,7 +7,12 @@ import (
 )
 
 func Parse(payload string, strict bool, subTags bool) *lib.EMVCoQRStruct {
-	match, _ := regexp.MatchString("^\\d{4}.+", payload)
+	reg, err := regexp.Compile(`^\d{4}.+`)
+	if err != nil {
+		return nil
+	}
+
+	match := reg.MatchString(payload)
 	if !match {
 		return nil
 	}
@@ -15,7 +20,7 @@ func Parse(payload string, strict bool, subTags bool) *lib.EMVCoQRStruct {
 	if strict {
 		excepted := payload[len(payload)-4:]
 		calculated, _ := lib.Checksum(payload[:len(payload)-4])
-		if excepted != *calculated {
+		if excepted != calculated {
 			return nil
 		}
 	}
@@ -27,9 +32,10 @@ func Parse(payload string, strict bool, subTags bool) *lib.EMVCoQRStruct {
 	}
 
 	if subTags {
+
 		for idx, tag := range *tags {
 			// Check if invalid
-			match, _ := regexp.MatchString("^\\d{4}.+", tag.Value)
+			match := reg.MatchString(tag.Value)
 			if !match {
 				continue
 			}

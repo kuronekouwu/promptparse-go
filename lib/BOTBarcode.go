@@ -33,7 +33,6 @@ func (bc *BOTBarcode) FromString(payload string) {
 	} else {
 		bc.Amount = 0
 	}
-
 }
 
 func (bc *BOTBarcode) ToString() string {
