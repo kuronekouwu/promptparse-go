@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/mrwan200/promptparse/lib"
+	"github.com/mrwan200/promptparse-go/lib"
 )
 
 const (

@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/mrwan200/promptparse/utils"
+	"github.com/mrwan200/promptparse-go/utils"
 )
 
 type TLVTag struct {

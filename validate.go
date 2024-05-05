@@ -1,4 +1,4 @@
-package promptparse
+package promptparsego
 
 type SlipVerifyStruct struct {
 	sendingBank string

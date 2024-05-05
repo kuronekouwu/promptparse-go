@@ -3,8 +3,8 @@ package generator
 import (
 	"fmt"
 
-	"github.com/mrwan200/promptparse/lib"
-	"github.com/mrwan200/promptparse/utils"
+	"github.com/mrwan200/promptparse-go/lib"
+	"github.com/mrwan200/promptparse-go/utils"
 )
 
 func Truemoney(mobileNo string, amount float64, message string) string {

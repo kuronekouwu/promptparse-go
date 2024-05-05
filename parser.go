@@ -1,9 +1,9 @@
-package promptparse
+package promptparsego
 
 import (
 	"regexp"
 
-	"github.com/mrwan200/promptparse/lib"
+	"github.com/mrwan200/promptparse-go/lib"
 )
 
 func Parse(payload string, strict bool, subTags bool) *lib.EMVCoQRStruct {
