@@ -1,8 +1,8 @@
 package promptparsego
 
 type SlipVerifyStruct struct {
-	sendingBank string
-	transRef    string
+	SendingBank string
+	TransRef    string
 }
 
 func SlipVerify(payload string) *SlipVerifyStruct {
@@ -17,7 +17,7 @@ func SlipVerify(payload string) *SlipVerifyStruct {
 	}
 
 	return &SlipVerifyStruct{
-		sendingBank: sendingBank,
-		transRef:    transRef,
+		SendingBank: sendingBank,
+		TransRef:    transRef,
 	}
 }
