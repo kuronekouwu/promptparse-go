@@ -20,6 +20,13 @@ func TestInvalidStringPassedToParserWithRandomStringAndSpeicalCharacter(t *testi
 	}
 }
 
+func TestInvalidStringPassedToParserWithCharacterLengthIsOdd(t *testing.T) {
+	parsed := promptparse.Parse("ODD", false, true)
+	if parsed != nil {
+		t.Fatalf("Incorrect test. (TestInvalidStringPassedToParserWithCharacterLengthIsOdd)")
+	}
+}
+
 func TestInvalidStringPassedToParser(t *testing.T) {
 	parsed := promptparse.Parse("AAAA0000", false, true)
 	if parsed != nil {
