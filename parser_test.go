@@ -117,6 +117,6 @@ func TestConvertBotBarcodeToBillPaymentInvalidWithDataLoss(t *testing.T) {
 	parsed := promptparse.ParseBarcode("|099400016550100\r123456789012\r670429")
 
 	if parsed.BillerID != "" {
-		t.Fatalf("Incorrect test. (TestParserPayloadStrictWithInvalidChecksum)")
+		t.Fatalf("Incorrect test. (TestConvertBotBarcodeToBillPaymentInvalidWithDataLoss)")
 	}
 }
