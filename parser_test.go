@@ -9,14 +9,14 @@ import (
 func TestInvalidStringPassedToParserWithRandomString(t *testing.T) {
 	parsed := promptparse.Parse("811f6a6f6f0b546cca5bb5ad9818b6aea755a8cabb31561d8cfc018050b75df9", false, true)
 	if parsed != nil {
-		t.Fatalf("Incorrect test. (TestInvalidStringPassedToParser)")
+		t.Fatalf("Incorrect test. (TestInvalidStringPassedToParserWithRandomString)")
 	}
 }
 
 func TestInvalidStringPassedToParserWithRandomStringAndSpeicalCharacter(t *testing.T) {
 	parsed := promptparse.Parse("1+LbROFK1ZIewyH2cKwXyZ8VGzTZjahsu5s6j52oL/k=", false, true)
 	if parsed != nil {
-		t.Fatalf("Incorrect test. (TestInvalidStringPassedToParser)")
+		t.Fatalf("Incorrect test. (TestInvalidStringPassedToParserWithRandomStringAndSpeicalCharacter)")
 	}
 }
 

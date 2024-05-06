@@ -24,6 +24,6 @@ func TestValidateSlipVerifyValid(t *testing.T) {
 func TestValidateSlipVerifyInvalid(t *testing.T) {
 	parsed := promptparse.SlipVerify("00020101021229370016A0000006770101110113006680111111153037645802TH540520.15630442BE")
 	if parsed != nil {
-		t.Fatalf("Incorrect test. (TestValidateChecksumTag)")
+		t.Fatalf("Incorrect test. (TestValidateSlipVerifyInvalid)")
 	}
 }
