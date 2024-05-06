@@ -58,8 +58,9 @@ func Encode(tags []TLVTag) string {
 			result := Encode(tag.SubTags)
 			// Append it
 			payload += result
+		} else {
+			payload += tag.Value
 		}
-		payload += tag.Value
 	}
 
 	return payload

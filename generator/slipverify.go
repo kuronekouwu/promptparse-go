@@ -8,18 +8,9 @@ import "github.com/mrwan200/promptparse-go/lib"
 func SlipVerify(sendingBank string, transRef string) string {
 	payload := []lib.TLVTag{
 		lib.Tag("00", lib.Encode([]lib.TLVTag{
-			{
-				ID:    "00",
-				Value: "000001",
-			},
-			{
-				ID:    "01",
-				Value: sendingBank,
-			},
-			{
-				ID:    "02",
-				Value: transRef,
-			},
+			lib.Tag("00", "000001"),
+			lib.Tag("01", sendingBank),
+			lib.Tag("02", transRef),
 		})),
 		lib.Tag("51", "TH"),
 	}

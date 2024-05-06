@@ -9,7 +9,7 @@ import (
 
 const (
 	/** Mobile number */
-	MSIDN = "01"
+	MSISDN = "01"
 	/** National ID or Tax ID */
 	NATID = "02"
 	/** E-Wallet ID */
@@ -20,7 +20,7 @@ const (
 
 // Generate PromptPay AnyID (Tag 29) QR Code
 func AnyID(types string, target string, amount float64) string {
-	if types == MSIDN {
+	if types == MSISDN {
 		msidn := target
 		if strings.HasPrefix(target, "0") {
 			msidn = "66" + msidn[1:]

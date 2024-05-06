@@ -36,7 +36,9 @@ func BillPayment(billerID string, amount float64, ref1 string, ref2 string, ref3
 
 	if ref3 != "" {
 		// Append data
-		result := append(payload, lib.Tag("62", ref3))
+		result := append(payload, lib.Tag("62", lib.Encode([]lib.TLVTag{
+			lib.Tag("07", ref3),
+		})))
 		payload = result
 	}
 

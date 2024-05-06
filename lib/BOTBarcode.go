@@ -19,6 +19,9 @@ func (bc *BOTBarcode) FromString(payload string) {
 	}
 
 	data := strings.Split(payload[1:], "\r")
+	if len(data) != 4 {
+		return
+	}
 	data = data[:4]
 
 	bc.BillerID = data[0]
@@ -41,7 +44,14 @@ func (bc *BOTBarcode) ToString() string {
 		bc.Amount = acualAmt * 100
 	}
 
-	return fmt.Sprintf("|%s\r%s\r%s\r%s", bc.BillerID, bc.Ref1, bc.Ref2, fmt.Sprintf("%.2f", bc.Amount))
+	result := fmt.Sprintf("|%s\r%s\r%s\r", bc.BillerID, bc.Ref1, bc.Ref2)
+	if bc.Amount != 0 {
+		result += fmt.Sprintf("%d", int64(bc.Amount))
+	} else {
+		result += "0"
+	}
+
+	return result
 }
 
 // Converts BOT Barcode to PromptPay QR Tag 30 (Bill Payment)
@@ -52,16 +62,26 @@ func (bc *BOTBarcode) ToQRTag30() string {
 		Tag("00", "A000000677010112"),
 		Tag("01", bc.BillerID),
 		Tag("02", bc.Ref1),
-		Tag("03", bc.Ref2),
+	}
+
+	if bc.Ref2 != "" {
+		result := append(tag30, Tag("03", bc.Ref2))
+		tag30 = result
 	}
 
 	payload := []TLVTag{
 		Tag("00", "01"),
-		Tag("01", "12"),
-		Tag("54", fmt.Sprintf("%.2f", float64(bc.Amount*100)/100)),
+		Tag("01", "11"),
 		Tag("30", Encode(tag30)),
 		Tag("53", "764"),
 		Tag("58", "TH"),
+	}
+
+	if bc.Amount != 0 {
+		payload[1] = Tag("01", "12")
+		// Append data
+		result := append(payload, Tag("54", fmt.Sprintf("%.2f", float64(bc.Amount*100)/100)))
+		payload = result
 	}
 
 	tag, err := WithCRCTag(Encode(payload), "63")

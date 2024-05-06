@@ -21,7 +21,7 @@ func (emv *EMVCoQRStruct) GetPayload() string {
 	return emv.Payload
 }
 
-func (emv *EMVCoQRStruct) Validate(crcTagId string) (string, error) {
+func (emv *EMVCoQRStruct) Validate(crcTagId string) bool {
 	var tlvTags []TLVTag
 
 	for _, tags := range emv.Tags {
@@ -30,13 +30,7 @@ func (emv *EMVCoQRStruct) Validate(crcTagId string) (string, error) {
 		}
 	}
 
-	// Encode tag
-	encoded := Encode(tlvTags)
+	expected, _ := WithCRCTag(Encode(tlvTags), crcTagId)
 
-	expected, err := WithCRCTag(encoded, crcTagId)
-	if err != nil {
-		return "", err
-	}
-
-	return expected, nil
+	return expected == emv.Payload
 }
